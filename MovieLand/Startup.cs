@@ -27,7 +27,7 @@ namespace MovieLand
         {
             services.AddDbContext<MovieLandDbContext>(options =>
                 options.UseSqlServer(
-                            Configuration.GetConnectionString("LaptopCegep")
+                            Configuration.GetConnectionString("D0604Cegep")
                 )
             );
 

@@ -23,14 +23,38 @@ namespace MovieLand.Controllers
             return View(_db.Genres.OrderBy(g => g.Name).ToList());
         }
 
-        public IActionResult Details(int? id)
+        //public IActionResult Details(int? id)
+        //{
+        //    if(id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    Genre genre = _db.Genres.FirstOrDefault(g => g.GenreId == id);
+
+        //    if (genre == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(genre);
+        //}
+        public async Task<IActionResult> Details(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            Genre genre = _db.Genres.FirstOrDefault(g => g.GenreId == id);
+            //GenreVM GenreVM = new GenreVM();
+            //{
+            //    Genre genre = _db.Genres.FirstOrDefault(g => g.GenreId == id),
+                var genre = _db.Genres
+                            .Include(m => m.Name)
+                            .Include(m => m.Movies.ToList())
+                                .FirstOrDefault(m => m.GenreId == id);
+
+            //}
             if (genre == null)
             {
                 return NotFound();
